@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EJ Tours and Projects - Discover Cape Town</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-mountain logo-icon"></i>
+                <div class="logo-text">EJ <span>Tours</span></div>
+            </div>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#tours">Tours</a></li>
+                    <li><a href="#booking">Book Now</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Discover the Magic of Cape Town</h1>
+                <p>Experience unforgettable adventures with EJ Tours and Projects. From majestic Table Mountain to pristine beaches, let us show you the best of the Mother City.</p>
+                <a href="#booking" class="btn">Book Your Adventure</a>
+                <a href="#tours" class="btn btn-secondary">View Tours</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tours Section -->
+    <section class="section" id="tours">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Popular Tours</h2>
+                <p>Choose from our carefully curated selection of Cape Town's finest experiences</p>
+            </div>
+            <div class="tours-grid" id="toursGrid"></div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="section booking-section" id="booking">
+        <div class="container">
+            <div class="booking-container">
+                <div class="section-title">
+                    <h2 style="color: white;">Book Your Tour</h2>
+                    <p style="color: rgba(255, 255, 255, 0.9);">Fill out the form below and we'll get back to you with availability and pricing</p>
+                </div>
+                <form class="booking-form" id="bookingForm">
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" required placeholder="Your full name">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" required placeholder="your@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" required placeholder="+27 XX XXX XXXX">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tourSelect">Select Tour *</label>
+                        <select id="tourSelect" required>
+                            <option value="">Choose a tour...</option>
+                            <option value="airport">Airport Transfer</option>
+                            <option value="wine">Wine Tours</option>
+                            <option value="cape-point">Cape Point Tour</option>
+                            <option value="boulders">Boulders Beach Tour</option>
+                            <option value="hunting">Hunting Experience</option>
+                            <option value="safari">Safari Tour</option>
+                            <option value="garden-route">Garden Route Tour</option>
+                            <option value="robben-island">Robben Island Tour</option>
+                            <option value="table-mountain">Table Mountain Tour</option>
+                            <option value="colorful-houses">Bo-Kaap Colorful Houses Tour</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tourDate">Preferred Date *</label>
+                            <input type="date" id="tourDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="guests">Number of Guests *</label>
+                            <input type="number" id="guests" min="1" max="20" required placeholder="1">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pickupLocation">Pickup Location</label>
+                        <input type="text" id="pickupLocation" placeholder="Hotel name or address (optional)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="specialRequests">Special Requests or Questions</label>
+                        <textarea id="specialRequests" placeholder="Any special requirements, dietary restrictions, or questions..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Request Booking
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Why Choose EJ Tours?</h2>
+                    <p>At EJ Tours and Projects, we're passionate about showcasing the incredible beauty and diversity of Cape Town. With years of local expertise, we provide authentic, personalized experiences that go beyond typical tourist attractions.</p>
+                    <p>Our professional guides are knowledgeable, friendly, and dedicated to making your Cape Town adventure unforgettable. Whether you're seeking adventure, culture, nature, or relaxation, we have the perfect tour for you.</p>
+                    <p>We pride ourselves on excellent customer service, safety, and creating memories that last a lifetime. Let us be your gateway to discovering the magic of the Mother City.</p>
+                </div>
+                <div class="about-img"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>EJ Tours and Projects</h3>
+                    <p>Your trusted partner for unforgettable Cape Town experiences. We specialize in personalized tours that showcase the best of South Africa's Mother City.</p>
+                    <div class="contact-info">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@ejtours.co.za</span>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Cape Town, South Africa</span>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#tours">Our Tours</a></li>
+                        <li><a href="#booking">Book Now</a></li>
+                        <li><a href="#about">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Popular Tours</h3>
+                    <ul class="footer-links">
+                        <li><a href="#booking">Table Mountain</a></li>
+                        <li><a href="#booking">Cape Point</a></li>
+                        <li><a href="#booking">Wine Tours</a></li>
+                        <li><a href="#booking">Safari Tours</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 EJ Tours and Projects. All rights reserved. | Discover Cape Town with us!</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Booking Confirmation Modal -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Booking Request Received!</h2>
+            <div id="confirmationMessage"></div>
+            <button class="btn" id="confirmBtn" style="margin-top: 20px;">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
