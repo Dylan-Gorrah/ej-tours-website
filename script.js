@@ -172,70 +172,63 @@ document.querySelectorAll('nav a').forEach(link => {
 });
 
 // ===========================
-// FORM SUBMISSION WITH EMAILJS
+// FORM SUBMISSION - SIMPLE & RELIABLE
 // ===========================
-
-// Wait for EmailJS to be fully loaded
-window.onload = function() {
-    // Initialize EmailJS with your public key
-    emailjs.init("FY_2fBO3OWEppJSHx");
-    console.log('EmailJS initialized successfully');
-};
-
-bookingForm.addEventListener('submit', function(e) {
+bookingForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     
-    const fullName = document.getElementById('fullName').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-    const tourSelect = document.getElementById('tourSelect');
-    const tourName = tourSelect.options[tourSelect.selectedIndex].text;
-    const tourDate = document.getElementById('tourDate').value;
-    const guests = document.getElementById('guests').value;
-    const pickupLocation = document.getElementById('pickupLocation').value;
-    const specialRequests = document.getElementById('specialRequests').value;
-
-    // Format the date
-    const formattedDate = new Date(tourDate).toLocaleDateString('en-US', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    });
-
-    // Send email using EmailJS
-    emailjs.send("service_9ensu07", "template_6s0v4cr", {
-        from_name: fullName,
-        from_email: email,
-        phone: phone,
-        tour_name: tourName,
-        tour_date: formattedDate,
-        guests: guests,
-        pickup_location: pickupLocation,
-        special_requests: specialRequests,
-        to_email: "ejtoursandprojects@gmail.com"
-    }).then(function(response) {
-        // Success - show confirmation
-        confirmationMessage.innerHTML = `
-            <p style="color: #666; margin-bottom: 20px;">Thank you, <strong>${fullName}</strong>!</p>
-            <p style="color: #666; margin-bottom: 15px;">Your booking request has been received. We'll contact you shortly at <strong>${email}</strong> or <strong>${phone}</strong> with availability and pricing details.</p>
-            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 20px; text-align: left;">
-                <p style="color: #333; margin-bottom: 10px;"><strong>Tour:</strong> ${tourName}</p>
-                <p style="color: #333; margin-bottom: 10px;"><strong>Date:</strong> ${formattedDate}</p>
-                <p style="color: #333; margin-bottom: 10px;"><strong>Guests:</strong> ${guests}</p>
-                ${pickupLocation ? `<p style="color: #333; margin-bottom: 10px;"><strong>Pickup:</strong> ${pickupLocation}</p>` : ''}
-                ${specialRequests ? `<p style="color: #333;"><strong>Notes:</strong> ${specialRequests}</p>` : ''}
-            </div>
-        `;
+    // Get form data
+    const formData = new FormData(bookingForm);
+    const data = Object.fromEntries(formData.entries());
+    
+    // Show loading
+    const submitBtn = bookingForm.querySelector('.submit-btn');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    submitBtn.disabled = true;
+    
+    // SIMPLE FORM SUBMISSION - Just uses Formspree
+    try {
+        const response = await fetch(bookingForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
         
-        // Show modal
-        bookingModal.style.display = 'flex';
-        
-    }, function(error) {
-        // Error - show error message
-        alert('Sorry, there was an error sending your booking. Please try again or call us directly.');
-        console.error('EmailJS error:', error);
-    });
+        if (response.ok) {
+            // SUCCESS - Show confirmation
+            confirmationMessage.innerHTML = `
+                <p style="color: #666; margin-bottom: 20px;">✅ <strong>Booking request sent successfully!</strong></p>
+                <p style="color: #666;">We've received your request and will contact you shortly at:</p>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 15px;">
+                    <p style="color: #333; margin-bottom: 5px;"><strong>Name:</strong> ${data.name}</p>
+                    <p style="color: #333; margin-bottom: 5px;"><strong>Email:</strong> ${data.email}</p>
+                    <p style="color: #333; margin-bottom: 5px;"><strong>Phone:</strong> ${data.phone}</p>
+                    <p style="color: #333; margin-bottom: 5px;"><strong>Tour:</strong> ${data.tour}</p>
+                    <p style="color: #333;"><strong>Guests:</strong> ${data.guests}</p>
+                </div>
+            `;
+            
+            // Show modal
+            bookingModal.style.display = 'flex';
+            
+            // Reset form
+            bookingForm.reset();
+            
+        } else {
+            // ERROR
+            alert('Sorry, there was an error. Please try again or contact us directly via WhatsApp/Email.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Network error. Please check your connection and try again.');
+    } finally {
+        // Reset button
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    }
 });
 
 // ===========================
@@ -243,12 +236,10 @@ bookingForm.addEventListener('submit', function(e) {
 // ===========================
 closeModal.addEventListener('click', function() {
     bookingModal.style.display = 'none';
-    bookingForm.reset();
 });
 
 confirmBtn.addEventListener('click', function() {
     bookingModal.style.display = 'none';
-    bookingForm.reset();
 });
 
 // ===========================
@@ -257,7 +248,6 @@ confirmBtn.addEventListener('click', function() {
 window.addEventListener('click', function(e) {
     if (e.target === bookingModal) {
         bookingModal.style.display = 'none';
-        bookingForm.reset();
     }
 });
 

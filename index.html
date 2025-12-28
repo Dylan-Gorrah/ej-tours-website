@@ -38,9 +38,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     
-    <!-- EmailJS -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    
     <!-- Structured Data for Google -->
     <script type="application/ld+json">
     {
@@ -106,7 +103,7 @@
         </div>
     </section>
 
-    <!-- Booking Section -->
+    <!-- Booking Section - FORM UPDATED HERE -->
     <section class="section booking-section" id="booking">
         <div class="container">
             <div class="booking-container">
@@ -115,8 +112,8 @@
                     <p style="color: rgba(255, 255, 255, 0.9);">Fill out the form below and we'll get back to you with availability and pricing</p>
                 </div>
                 
-                <!-- FORM SENDS TO YOUR EMAIL -->
-                <form class="booking-form" id="bookingForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <!-- FORM SENDS DIRECTLY TO YOUR EMAIL - NO SETUP NEEDED -->
+                <form class="booking-form" id="bookingForm" action="https://formspree.io/f/mvgoqlbo" method="POST">
                     <div class="form-group">
                         <label for="fullName">Full Name *</label>
                         <input type="text" id="fullName" name="name" required placeholder="Your full name">
@@ -129,7 +126,7 @@
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone Number *</label>
-                            <input type="tel" id="phone" name="phone" required placeholder="+27 XX XXX XXXX">
+                            <input type="tel" id="phone" name="phone" required placeholder="+27 74 931 0308">
                         </div>
                     </div>
 
@@ -174,12 +171,12 @@
                         <textarea id="specialRequests" name="message" placeholder="Any special requirements, dietary restrictions, or questions..."></textarea>
                     </div>
 
-                    <!-- Hidden fields for better email formatting -->
-                    <input type="hidden" name="_subject" value="🎉 New Tour Booking Request - EJ Tours">
-                    <input type="hidden" name="_template" value="box">
+                    <!-- Hidden fields to make email look nice -->
+                    <input type="hidden" name="_subject" value="🎉 NEW BOOKING - EJ Tours Website">
+                    <input type="text" name="_gotcha" style="display:none">
 
                     <button type="submit" class="submit-btn">
-                        <i class="fas fa-paper-plane"></i> Request Booking
+                        <i class="fas fa-paper-plane"></i> Send Booking Request
                     </button>
                 </form>
             </div>
@@ -210,7 +207,6 @@
                     <p>Your trusted partner for unforgettable Cape Town experiences. We specialize in personalized tours that showcase the best of South Africa's Mother City.</p>
                     <div class="contact-info">
                         <i class="fas fa-envelope"></i>
-                        <!-- EMAIL NOW CLICKABLE -->
                         <a href="mailto:ejtoursandprojects@gmail.com" style="color: #CCC; text-decoration: none;">ejtoursandprojects@gmail.com</a>
                     </div>
                     <div class="contact-info">
@@ -256,8 +252,8 @@
             </div>
             <h2>Booking Request Sent!</h2>
             <div id="confirmationMessage">
-                <p style="color: #666; font-size: 1.1rem; margin-bottom: 15px;">✅ <strong>Your order has been sent!</strong></p>
-                <p style="color: #666;">We'll be contacting you shortly with availability and pricing details.</p>
+                <p style="color: #666; font-size: 1.1rem; margin-bottom: 15px;">✅ <strong>Your request has been sent!</strong></p>
+                <p style="color: #666;">We'll contact you shortly at the email or phone number you provided.</p>
             </div>
             <button class="btn" id="confirmBtn" style="margin-top: 20px;">Close</button>
         </div>
@@ -285,7 +281,6 @@
                     <span class="contact-detail">Chat with us instantly</span>
                 </div>
             </a>
-            <!-- EMAIL NOW CLICKABLE -->
             <a href="mailto:ejtoursandprojects@gmail.com" class="contact-option email-btn">
                 <i class="fas fa-envelope"></i>
                 <div class="contact-info-text">
