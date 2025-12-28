@@ -172,8 +172,16 @@ document.querySelectorAll('nav a').forEach(link => {
 });
 
 // ===========================
-// FORM SUBMISSION
+// FORM SUBMISSION WITH EMAILJS
 // ===========================
+
+// Wait for EmailJS to be fully loaded
+window.onload = function() {
+    // Initialize EmailJS with your public key
+    emailjs.init("FY_2fBO3OWEppJSHx");
+    console.log('EmailJS initialized successfully');
+};
+
 bookingForm.addEventListener('submit', function(e) {
     e.preventDefault();
     
@@ -195,21 +203,39 @@ bookingForm.addEventListener('submit', function(e) {
         day: 'numeric'
     });
 
-    // Create confirmation message
-    confirmationMessage.innerHTML = `
-        <p style="color: #666; margin-bottom: 20px;">Thank you, <strong>${fullName}</strong>!</p>
-        <p style="color: #666; margin-bottom: 15px;">Your booking request has been received. We'll contact you shortly at <strong>${email}</strong> or <strong>${phone}</strong> with availability and pricing details.</p>
-        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 20px; text-align: left;">
-            <p style="color: #333; margin-bottom: 10px;"><strong>Tour:</strong> ${tourName}</p>
-            <p style="color: #333; margin-bottom: 10px;"><strong>Date:</strong> ${formattedDate}</p>
-            <p style="color: #333; margin-bottom: 10px;"><strong>Guests:</strong> ${guests}</p>
-            ${pickupLocation ? `<p style="color: #333; margin-bottom: 10px;"><strong>Pickup:</strong> ${pickupLocation}</p>` : ''}
-            ${specialRequests ? `<p style="color: #333;"><strong>Notes:</strong> ${specialRequests}</p>` : ''}
-        </div>
-    `;
-    
-    // Show modal
-    bookingModal.style.display = 'flex';
+    // Send email using EmailJS
+    emailjs.send("service_9ensu07", "template_6s0v4cr", {
+        from_name: fullName,
+        from_email: email,
+        phone: phone,
+        tour_name: tourName,
+        tour_date: formattedDate,
+        guests: guests,
+        pickup_location: pickupLocation,
+        special_requests: specialRequests,
+        to_email: "ejtoursandprojects@gmail.com"
+    }).then(function(response) {
+        // Success - show confirmation
+        confirmationMessage.innerHTML = `
+            <p style="color: #666; margin-bottom: 20px;">Thank you, <strong>${fullName}</strong>!</p>
+            <p style="color: #666; margin-bottom: 15px;">Your booking request has been received. We'll contact you shortly at <strong>${email}</strong> or <strong>${phone}</strong> with availability and pricing details.</p>
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 20px; text-align: left;">
+                <p style="color: #333; margin-bottom: 10px;"><strong>Tour:</strong> ${tourName}</p>
+                <p style="color: #333; margin-bottom: 10px;"><strong>Date:</strong> ${formattedDate}</p>
+                <p style="color: #333; margin-bottom: 10px;"><strong>Guests:</strong> ${guests}</p>
+                ${pickupLocation ? `<p style="color: #333; margin-bottom: 10px;"><strong>Pickup:</strong> ${pickupLocation}</p>` : ''}
+                ${specialRequests ? `<p style="color: #333;"><strong>Notes:</strong> ${specialRequests}</p>` : ''}
+            </div>
+        `;
+        
+        // Show modal
+        bookingModal.style.display = 'flex';
+        
+    }, function(error) {
+        // Error - show error message
+        alert('Sorry, there was an error sending your booking. Please try again or call us directly.');
+        console.error('EmailJS error:', error);
+    });
 });
 
 // ===========================
