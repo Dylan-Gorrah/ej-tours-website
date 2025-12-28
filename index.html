@@ -3,10 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EJ Tours and Projects - Discover Cape Town</title>
+    
+    <!-- Primary Meta Tags for SEO -->
+    <title>EJ Tours and Projects - Cape Town Tours, Safari & Wine Tours | Book Now</title>
+    <meta name="title" content="EJ Tours and Projects - Cape Town Tours, Safari & Wine Tours | Book Now">
+    <meta name="description" content="Discover Cape Town with EJ Tours! Table Mountain, Cape Point, Wine Tours, Safari, Robben Island & more. Professional guides, hotel pickup included. Book your adventure today!">
+    <meta name="keywords" content="Cape Town tours, Table Mountain tours, Wine tours Stellenbosch, Safari tours South Africa, Cape Point tours, Robben Island, Boulders Beach penguins, Bo-Kaap tours, Garden Route, Cape Town travel, South Africa tourism">
+    <meta name="author" content="EJ Tours and Projects">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://ejtoursandprojects.it.com/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ejtoursandprojects.it.com/">
+    <meta property="og:title" content="EJ Tours and Projects - Discover Cape Town">
+    <meta property="og:description" content="Experience unforgettable adventures with EJ Tours. From Table Mountain to pristine beaches, we show you the best of Cape Town.">
+    <meta property="og:image" content="https://ejtoursandprojects.it.com/images/hero-table-mountain.jpg">
+    <meta property="og:locale" content="en_ZA">
+    <meta property="og:site_name" content="EJ Tours and Projects">
+    
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://ejtoursandprojects.it.com/">
+    <meta property="twitter:title" content="EJ Tours and Projects - Discover Cape Town">
+    <meta property="twitter:description" content="Experience unforgettable adventures with EJ Tours. From Table Mountain to pristine beaches, we show you the best of Cape Town.">
+    <meta property="twitter:image" content="https://ejtoursandprojects.it.com/images/hero-table-mountain.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
+    
+    <!-- External Resources -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Structured Data for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TravelAgency",
+      "name": "EJ Tours and Projects",
+      "description": "Professional tour operator specializing in Cape Town tours, wine tours, safari experiences, and adventure activities.",
+      "url": "https://ejtoursandprojects.it.com",
+      "telephone": "+27-74-931-0308",
+      "email": "ejtoursandprojects@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Cape Town",
+        "addressRegion": "Western Cape",
+        "addressCountry": "ZA"
+      }
+    }
+    </script>
 </head>
 <body>
     <!-- Header -->
@@ -25,7 +74,7 @@
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
@@ -62,60 +111,69 @@
                     <h2 style="color: white;">Book Your Tour</h2>
                     <p style="color: rgba(255, 255, 255, 0.9);">Fill out the form below and we'll get back to you with availability and pricing</p>
                 </div>
-                <form class="booking-form" id="bookingForm">
+                
+                <!-- FORM SENDS TO YOUR EMAIL -->
+                <form class="booking-form" id="bookingForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                     <div class="form-group">
                         <label for="fullName">Full Name *</label>
-                        <input type="text" id="fullName" required placeholder="Your full name">
+                        <input type="text" id="fullName" name="name" required placeholder="Your full name">
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label for="email">Email Address *</label>
-                            <input type="email" id="email" required placeholder="your@email.com">
+                            <input type="email" id="email" name="email" required placeholder="your@email.com">
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone Number *</label>
-                            <input type="tel" id="phone" required placeholder="+27 XX XXX XXXX">
+                            <input type="tel" id="phone" name="phone" required placeholder="+27 XX XXX XXXX">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="tourSelect">Select Tour *</label>
-                        <select id="tourSelect" required>
+                        <select id="tourSelect" name="tour" required>
                             <option value="">Choose a tour...</option>
-                            <option value="airport">Airport Transfer</option>
-                            <option value="wine">Wine Tours</option>
-                            <option value="cape-point">Cape Point Tour</option>
-                            <option value="boulders">Boulders Beach Tour</option>
-                            <option value="hunting">Hunting Experience</option>
-                            <option value="safari">Safari Tour</option>
-                            <option value="garden-route">Garden Route Tour</option>
-                            <option value="robben-island">Robben Island Tour</option>
-                            <option value="table-mountain">Table Mountain Tour</option>
-                            <option value="colorful-houses">Bo-Kaap Colorful Houses Tour</option>
+                            <option value="Table Mountain Tour">Table Mountain Tour</option>
+                            <option value="Cape Point & Boulders Beach">Cape Point & Boulders Beach</option>
+                            <option value="Wine Tours">Wine Tours - Stellenbosch & Franschhoek</option>
+                            <option value="Robben Island & Waterfront">Robben Island & V&A Waterfront</option>
+                            <option value="Safari Tour">Safari Tour</option>
+                            <option value="Shark Diving">Shark Cage Diving - Gansbaai</option>
+                            <option value="Quad Biking">Quad Biking - Atlantis Dunes</option>
+                            <option value="Paragliding">Tandem Paragliding</option>
+                            <option value="Bo-Kaap Tour">Bo-Kaap Colorful Houses</option>
+                            <option value="Crocodile Tour">Crocodile Tour - Winelands</option>
+                            <option value="Garden Route">Garden Route Tour</option>
+                            <option value="Hunting">Hunting Experience</option>
+                            <option value="Airport Transfer">Airport Transfer</option>
                         </select>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label for="tourDate">Preferred Date *</label>
-                            <input type="date" id="tourDate" required>
+                            <input type="date" id="tourDate" name="date" required>
                         </div>
                         <div class="form-group">
                             <label for="guests">Number of Guests *</label>
-                            <input type="number" id="guests" min="1" max="20" required placeholder="1">
+                            <input type="number" id="guests" name="guests" min="1" max="20" required placeholder="1">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="pickupLocation">Pickup Location</label>
-                        <input type="text" id="pickupLocation" placeholder="Hotel name or address (optional)">
+                        <input type="text" id="pickupLocation" name="pickup" placeholder="Hotel name or address (optional)">
                     </div>
 
                     <div class="form-group">
                         <label for="specialRequests">Special Requests or Questions</label>
-                        <textarea id="specialRequests" placeholder="Any special requirements, dietary restrictions, or questions..."></textarea>
+                        <textarea id="specialRequests" name="message" placeholder="Any special requirements, dietary restrictions, or questions..."></textarea>
                     </div>
+
+                    <!-- Hidden fields for better email formatting -->
+                    <input type="hidden" name="_subject" value="🎉 New Tour Booking Request - EJ Tours">
+                    <input type="hidden" name="_template" value="box">
 
                     <button type="submit" class="submit-btn">
                         <i class="fas fa-paper-plane"></i> Request Booking
@@ -149,7 +207,12 @@
                     <p>Your trusted partner for unforgettable Cape Town experiences. We specialize in personalized tours that showcase the best of South Africa's Mother City.</p>
                     <div class="contact-info">
                         <i class="fas fa-envelope"></i>
-                        <span>info@ejtours.co.za</span>
+                        <!-- EMAIL NOW CLICKABLE -->
+                        <a href="mailto:ejtoursandprojects@gmail.com" style="color: #CCC; text-decoration: none;">ejtoursandprojects@gmail.com</a>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-phone"></i>
+                        <span>+27 74 931 0308</span>
                     </div>
                     <div class="contact-info">
                         <i class="fas fa-map-marker-alt"></i>
@@ -181,16 +244,59 @@
         </div>
     </footer>
 
-    <!-- Booking Confirmation Modal -->git add .
+    <!-- Success Modal -->
     <div class="modal" id="bookingModal">
         <div class="modal-content">
             <span class="close-modal" id="closeModal">&times;</span>
             <div class="success-icon">
                 <i class="fas fa-check-circle"></i>
             </div>
-            <h2>Booking Request Received!</h2>
-            <div id="confirmationMessage"></div>
+            <h2>Booking Request Sent!</h2>
+            <div id="confirmationMessage">
+                <p style="color: #666; font-size: 1.1rem; margin-bottom: 15px;">✅ <strong>Your order has been sent!</strong></p>
+                <p style="color: #666;">We'll be contacting you shortly with availability and pricing details.</p>
+            </div>
             <button class="btn" id="confirmBtn" style="margin-top: 20px;">Close</button>
+        </div>
+    </div>
+
+    <!-- Floating Contact Button -->
+    <div class="floating-contact-btn" id="floatingContactBtn">
+        <i class="fas fa-envelope"></i>
+        <span class="contact-pulse"></span>
+    </div>
+
+    <!-- Glass Contact Panel -->
+    <div class="contact-panel" id="contactPanel">
+        <div class="panel-header">
+            <h3>Contact Us</h3>
+            <button class="close-panel" id="closePanel">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="panel-content">
+            <a href="https://wa.me/27749310308" target="_blank" class="contact-option whatsapp-btn">
+                <i class="fab fa-whatsapp"></i>
+                <div class="contact-info-text">
+                    <span class="contact-label">WhatsApp</span>
+                    <span class="contact-detail">Chat with us instantly</span>
+                </div>
+            </a>
+            <!-- EMAIL NOW CLICKABLE -->
+            <a href="mailto:ejtoursandprojects@gmail.com" class="contact-option email-btn">
+                <i class="fas fa-envelope"></i>
+                <div class="contact-info-text">
+                    <span class="contact-label">Email</span>
+                    <span class="contact-detail">ejtoursandprojects@gmail.com</span>
+                </div>
+            </a>
+            <a href="tel:+27749310308" class="contact-option phone-btn">
+                <i class="fas fa-phone"></i>
+                <div class="contact-info-text">
+                    <span class="contact-label">Phone</span>
+                    <span class="contact-detail">+27 74 931 0308</span>
+                </div>
+            </a>
         </div>
     </div>
 

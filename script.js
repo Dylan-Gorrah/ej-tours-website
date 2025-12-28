@@ -121,6 +121,37 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ===========================
+// FLOATING CONTACT PANEL
+// ===========================
+const floatingContactBtn = document.getElementById('floatingContactBtn');
+const contactPanel = document.getElementById('contactPanel');
+const closePanelBtn = document.getElementById('closePanel');
+
+// Toggle contact panel
+floatingContactBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    contactPanel.classList.toggle('active');
+});
+
+// Close panel with close button
+closePanelBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    contactPanel.classList.remove('active');
+});
+
+// Close panel when clicking outside
+document.addEventListener('click', function(e) {
+    if (!contactPanel.contains(e.target) && !floatingContactBtn.contains(e.target)) {
+        contactPanel.classList.remove('active');
+    }
+});
+
+// Prevent panel from closing when clicking inside it
+contactPanel.addEventListener('click', function(e) {
+    e.stopPropagation();
+});
+
+// ===========================
 // MOBILE MENU TOGGLE
 // ===========================
 mobileMenuBtn.addEventListener('click', function() {

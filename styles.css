@@ -505,6 +505,209 @@ footer {
 }
 
 /* ===========================
+   FLOATING CONTACT BUTTON
+   =========================== */
+.floating-contact-btn {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(230, 126, 34, 0.4);
+    z-index: 999;
+    transition: var(--transition);
+    animation: pulse 2s infinite;
+}
+
+.floating-contact-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(230, 126, 34, 0.6);
+}
+
+.floating-contact-btn i {
+    color: white;
+    font-size: 1.5rem;
+}
+
+.contact-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+    animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* ===========================
+   GLASS CONTACT PANEL
+   =========================== */
+.contact-panel {
+    position: fixed;
+    right: 30px;
+    bottom: 110px;
+    width: 320px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px) scale(0.9);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.contact-panel.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.panel-header h3 {
+    color: var(--secondary);
+    font-size: 1.2rem;
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+}
+
+.close-panel {
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    color: #999;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.close-panel:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--secondary);
+}
+
+.panel-content {
+    padding: 15px 25px 25px;
+}
+
+.contact-option {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: var(--transition);
+    margin-bottom: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.contact-option:last-child {
+    margin-bottom: 0;
+}
+
+.contact-option:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.contact-option i {
+    font-size: 1.8rem;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    transition: var(--transition);
+}
+
+.whatsapp-btn i {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: white;
+}
+
+.whatsapp-btn:hover {
+    background: rgba(37, 211, 102, 0.1);
+}
+
+.email-btn i {
+    background: linear-gradient(135deg, var(--primary) 0%, #D35400 100%);
+    color: white;
+}
+
+.email-btn:hover {
+    background: rgba(230, 126, 34, 0.1);
+}
+
+.phone-btn i {
+    background: linear-gradient(135deg, var(--accent) 0%, #0E7C66 100%);
+    color: white;
+}
+
+.phone-btn:hover {
+    background: rgba(22, 160, 133, 0.1);
+}
+
+.contact-info-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.contact-label {
+    font-weight: 600;
+    color: var(--secondary);
+    font-size: 1rem;
+}
+
+.contact-detail {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* ===========================
    RESPONSIVE DESIGN
    =========================== */
 @media (max-width: 768px) {
@@ -564,5 +767,20 @@ footer {
 
     .section-title h2 {
         font-size: 2rem;
+    }
+
+    /* Floating contact adjustments for mobile */
+    .floating-contact-btn {
+        right: 20px;
+        bottom: 20px;
+        width: 55px;
+        height: 55px;
+    }
+
+    .contact-panel {
+        right: 20px;
+        bottom: 90px;
+        width: calc(100% - 40px);
+        max-width: 320px;
     }
 }
