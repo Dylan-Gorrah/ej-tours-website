@@ -197,7 +197,7 @@ bookingForm.addEventListener('submit', function(e) {
     });
 
     // Create WhatsApp message with emojis for better formatting
-    let whatsappMessage = `🎉 *NEW BOOKING REQUEST*%0A%0A`;
+    let whatsappMessage = ` *NEW BOOKING REQUEST*%0A%0A`;
     whatsappMessage += `👤 *Name:* ${fullName}%0A`;
     whatsappMessage += `📧 *Email:* ${email}%0A`;
     whatsappMessage += `📱 *Phone:* ${phone}%0A`;
