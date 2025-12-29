@@ -172,63 +172,79 @@ document.querySelectorAll('nav a').forEach(link => {
 });
 
 // ===========================
-// FORM SUBMISSION - SIMPLE & RELIABLE
+// FORM SUBMISSION WITH WHATSAPP
 // ===========================
-bookingForm.addEventListener('submit', async function(e) {
+bookingForm.addEventListener('submit', function(e) {
     e.preventDefault();
     
-    // Get form data
-    const formData = new FormData(bookingForm);
-    const data = Object.fromEntries(formData.entries());
+    // Get form values
+    const fullName = document.getElementById('fullName').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const tourSelect = document.getElementById('tourSelect');
+    const tourName = tourSelect.options[tourSelect.selectedIndex].text;
+    const tourDate = document.getElementById('tourDate').value;
+    const guests = document.getElementById('guests').value;
+    const pickupLocation = document.getElementById('pickupLocation').value;
+    const specialRequests = document.getElementById('specialRequests').value;
+
+    // Format the date nicely
+    const formattedDate = new Date(tourDate).toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+
+    // Create WhatsApp message with emojis for better formatting
+    let whatsappMessage = `🎉 *NEW BOOKING REQUEST*%0A%0A`;
+    whatsappMessage += `👤 *Name:* ${fullName}%0A`;
+    whatsappMessage += `📧 *Email:* ${email}%0A`;
+    whatsappMessage += `📱 *Phone:* ${phone}%0A`;
+    whatsappMessage += `%0A`;
+    whatsappMessage += `🎫 *Tour:* ${tourName}%0A`;
+    whatsappMessage += `📅 *Date:* ${formattedDate}%0A`;
+    whatsappMessage += `👥 *Number of Guests:* ${guests}%0A`;
     
-    // Show loading
-    const submitBtn = bookingForm.querySelector('.submit-btn');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-    submitBtn.disabled = true;
-    
-    // SIMPLE FORM SUBMISSION - Just uses Formspree
-    try {
-        const response = await fetch(bookingForm.action, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'Accept': 'application/json'
-            }
-        });
-        
-        if (response.ok) {
-            // SUCCESS - Show confirmation
-            confirmationMessage.innerHTML = `
-                <p style="color: #666; margin-bottom: 20px;">✅ <strong>Booking request sent successfully!</strong></p>
-                <p style="color: #666;">We've received your request and will contact you shortly at:</p>
-                <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 15px;">
-                    <p style="color: #333; margin-bottom: 5px;"><strong>Name:</strong> ${data.name}</p>
-                    <p style="color: #333; margin-bottom: 5px;"><strong>Email:</strong> ${data.email}</p>
-                    <p style="color: #333; margin-bottom: 5px;"><strong>Phone:</strong> ${data.phone}</p>
-                    <p style="color: #333; margin-bottom: 5px;"><strong>Tour:</strong> ${data.tour}</p>
-                    <p style="color: #333;"><strong>Guests:</strong> ${data.guests}</p>
-                </div>
-            `;
-            
-            // Show modal
-            bookingModal.style.display = 'flex';
-            
-            // Reset form
-            bookingForm.reset();
-            
-        } else {
-            // ERROR
-            alert('Sorry, there was an error. Please try again or contact us directly via WhatsApp/Email.');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Network error. Please check your connection and try again.');
-    } finally {
-        // Reset button
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
+    if (pickupLocation) {
+        whatsappMessage += `📍 *Pickup Location:* ${pickupLocation}%0A`;
     }
+    
+    if (specialRequests) {
+        whatsappMessage += `%0A💬 *Special Requests:*%0A${specialRequests}%0A`;
+    }
+    
+    whatsappMessage += `%0A------------------------------------%0A`;
+    whatsappMessage += `_Sent via EJ Tours Website_`;
+
+    // Your WhatsApp business number (including country code, no spaces or special characters)
+    const whatsappNumber = '27749310308';
+    
+    // Create WhatsApp URL
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+    
+    // Update confirmation message
+    confirmationMessage.innerHTML = `
+        <p style="color: #666; margin-bottom: 20px;">Thank you, <strong>${fullName}</strong>!</p>
+        <p style="color: #666; margin-bottom: 15px;">Your booking details are ready to send via WhatsApp.</p>
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 20px; text-align: left;">
+            <p style="color: #333; margin-bottom: 10px;"><strong>Tour:</strong> ${tourName}</p>
+            <p style="color: #333; margin-bottom: 10px;"><strong>Date:</strong> ${formattedDate}</p>
+            <p style="color: #333; margin-bottom: 10px;"><strong>Guests:</strong> ${guests}</p>
+            ${pickupLocation ? `<p style="color: #333; margin-bottom: 10px;"><strong>Pickup:</strong> ${pickupLocation}</p>` : ''}
+        </div>
+        <p style="color: #25D366; margin-top: 20px; font-weight: 600;">
+            <i class="fab fa-whatsapp"></i> WhatsApp will open automatically...
+        </p>
+    `;
+    
+    // Show modal
+    bookingModal.style.display = 'flex';
+    
+    // Open WhatsApp after a short delay (gives time for user to see the modal)
+    setTimeout(function() {
+        window.open(whatsappURL, '_blank');
+    }, 1000);
 });
 
 // ===========================
@@ -236,10 +252,12 @@ bookingForm.addEventListener('submit', async function(e) {
 // ===========================
 closeModal.addEventListener('click', function() {
     bookingModal.style.display = 'none';
+    bookingForm.reset();
 });
 
 confirmBtn.addEventListener('click', function() {
     bookingModal.style.display = 'none';
+    bookingForm.reset();
 });
 
 // ===========================
@@ -248,6 +266,7 @@ confirmBtn.addEventListener('click', function() {
 window.addEventListener('click', function(e) {
     if (e.target === bookingModal) {
         bookingModal.style.display = 'none';
+        bookingForm.reset();
     }
 });
 

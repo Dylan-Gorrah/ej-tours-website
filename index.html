@@ -103,17 +103,17 @@
         </div>
     </section>
 
-    <!-- Booking Section - FORM UPDATED HERE -->
+    <!-- Booking Section -->
     <section class="section booking-section" id="booking">
         <div class="container">
             <div class="booking-container">
                 <div class="section-title">
                     <h2 style="color: white;">Book Your Tour</h2>
-                    <p style="color: rgba(255, 255, 255, 0.9);">Fill out the form below and we'll get back to you with availability and pricing</p>
+                    <p style="color: rgba(255, 255, 255, 0.9);">Fill out the form below and send your booking request via WhatsApp</p>
                 </div>
                 
-                <!-- FORM SENDS DIRECTLY TO YOUR EMAIL - NO SETUP NEEDED -->
-                <form class="booking-form" id="bookingForm" action="https://formspree.io/f/mvgoqlbo" method="POST">
+                <!-- FORM NOW SENDS VIA WHATSAPP -->
+                <form class="booking-form" id="bookingForm">
                     <div class="form-group">
                         <label for="fullName">Full Name *</label>
                         <input type="text" id="fullName" name="name" required placeholder="Your full name">
@@ -126,7 +126,7 @@
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone Number *</label>
-                            <input type="tel" id="phone" name="phone" required placeholder="+27 74 931 0308">
+                            <input type="tel" id="phone" name="phone" required placeholder="+27 XX XXX XXXX">
                         </div>
                     </div>
 
@@ -171,12 +171,8 @@
                         <textarea id="specialRequests" name="message" placeholder="Any special requirements, dietary restrictions, or questions..."></textarea>
                     </div>
 
-                    <!-- Hidden fields to make email look nice -->
-                    <input type="hidden" name="_subject" value="🎉 NEW BOOKING - EJ Tours Website">
-                    <input type="text" name="_gotcha" style="display:none">
-
                     <button type="submit" class="submit-btn">
-                        <i class="fas fa-paper-plane"></i> Send Booking Request
+                        <i class="fab fa-whatsapp"></i> Send via WhatsApp
                     </button>
                 </form>
             </div>
@@ -248,12 +244,12 @@
         <div class="modal-content">
             <span class="close-modal" id="closeModal">&times;</span>
             <div class="success-icon">
-                <i class="fas fa-check-circle"></i>
+                <i class="fab fa-whatsapp"></i>
             </div>
-            <h2>Booking Request Sent!</h2>
+            <h2>Opening WhatsApp...</h2>
             <div id="confirmationMessage">
-                <p style="color: #666; font-size: 1.1rem; margin-bottom: 15px;">✅ <strong>Your request has been sent!</strong></p>
-                <p style="color: #666;">We'll contact you shortly at the email or phone number you provided.</p>
+                <p style="color: #666; font-size: 1.1rem; margin-bottom: 15px;">✅ <strong>Your booking details are ready!</strong></p>
+                <p style="color: #666;">WhatsApp will open with your booking details. Just press <strong>Send</strong> to complete your request.</p>
             </div>
             <button class="btn" id="confirmBtn" style="margin-top: 20px;">Close</button>
         </div>
@@ -291,7 +287,7 @@
             <a href="tel:+27749310308" class="contact-option phone-btn">
                 <i class="fas fa-phone"></i>
                 <div class="contact-info-text">
-                    <span class="contact-label">Phone</span>
+                    <span class="contact-label">Call Us</span>
                     <span class="contact-detail">+27 74 931 0308</span>
                 </div>
             </a>
