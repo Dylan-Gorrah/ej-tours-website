@@ -94,27 +94,12 @@ const toastNotification = document.getElementById('toastNotification');
 // LOAD TOURS FUNCTION
 // ===========================
 function loadTours() {
-    const toursGrid = document.getElementById('toursGrid');
-    
-    if (!toursGrid) {
-        console.error('❌ Tours grid element not found!');
-        return;
-    }
-    
-    if (!tours || tours.length === 0) {
-        console.error('❌ No tours data available!');
-        return;
-    }
-    
-    console.log(`🎯 Loading ${tours.length} tours...`);
-    
-    toursGrid.innerHTML = ''; // Clear existing content
-    
-    tours.forEach((tour, index) => {
+    tours.forEach(tour => {
         const tourCard = document.createElement('div');
         tourCard.className = 'tour-card';
         tourCard.innerHTML = `
-            <div class="tour-img" style="background-image: url('${tour.image}')">
+            <div class="tour-img">
+                <div class="tour-img-bg" style="background-image: url('${tour.image}')"></div>
                 <div class="tour-badge">${tour.badge}</div>
             </div>
             <div class="tour-info">
@@ -126,10 +111,7 @@ function loadTours() {
             </div>
         `;
         toursGrid.appendChild(tourCard);
-        console.log(`✅ Loaded tour ${index + 1}: ${tour.name}`);
     });
-    
-    console.log('🎉 All tours loaded successfully!');
 }
 
 // ===========================
@@ -307,7 +289,7 @@ emailBtn.addEventListener('click', async (e) => {
 });
 
 // ===========================
-// FORM SUBMISSION WITH WHATSAPP
+// FORM SUBMISSION WITH WHATSAPP - FIXED
 // ===========================
 bookingForm.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -331,32 +313,39 @@ bookingForm.addEventListener('submit', function(e) {
         day: 'numeric'
     });
 
-    // Create WhatsApp message with emojis for better formatting
-    let whatsappMessage = `🎫 *NEW BOOKING REQUEST*%0A%0A`;
-    whatsappMessage += `👤 *Name:* ${fullName}%0A`;
-    whatsappMessage += `📧 *Email:* ${email}%0A`;
-    whatsappMessage += `📱 *Phone:* ${phone}%0A`;
-    whatsappMessage += `%0A`;
-    whatsappMessage += `🗺️ *Tour:* ${tourName}%0A`;
-    whatsappMessage += `📅 *Date:* ${formattedDate}%0A`;
-    whatsappMessage += `👥 *Number of Guests:* ${guests}%0A`;
+    // Create professional WhatsApp message with properly encoded emojis
+    let whatsappMessage = `✨ *NEW BOOKING REQUEST*
+━━━━━━━━━━━━━━━━━━━━
+👥 *Guest Information*
+Name: ${fullName}
+Email: ${email}
+Phone: ${phone}
+📖 *Booking Details*
+Tour: ${tourName}
+Date: ${formattedDate}
+Guests: ${guests} ${guests === '1' ? 'person' : 'people'}`;
     
     if (pickupLocation) {
-        whatsappMessage += `📍 *Pickup Location:* ${pickupLocation}%0A`;
+        whatsappMessage += `
+Pickup: ${pickupLocation}`;
     }
     
     if (specialRequests) {
-        whatsappMessage += `%0A💬 *Special Requests:*%0A${specialRequests}%0A`;
+        whatsappMessage += `
+📌 *Additional Notes*
+${specialRequests}`;
     }
     
-    whatsappMessage += `%0A------------------------------------%0A`;
-    whatsappMessage += `_Sent via EJ Tours Website_`;
+    whatsappMessage += `
+━━━━━━━━━━━━━━━━━━━━
+🌐 _via EJ Tours Website_`;
 
     // Your WhatsApp business number
     const whatsappNumber = '27749310308';
     
-    // Create WhatsApp URL
-    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+    // Create WhatsApp URL with proper encoding - FIXED VERSION
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    const whatsappURL = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`;
     
     // Update confirmation message
     confirmationMessage.innerHTML = `
@@ -376,7 +365,7 @@ bookingForm.addEventListener('submit', function(e) {
     // Show modal
     bookingModal.style.display = 'flex';
     
-    // Open WhatsApp
+    // Open WhatsApp using location.href for better encoding support
     setTimeout(function() {
         window.location.href = whatsappURL;
     }, 1000);
