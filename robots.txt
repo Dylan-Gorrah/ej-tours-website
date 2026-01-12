@@ -1,0 +1,31 @@
+# Robots.txt for EJ Tours and Projects
+# https://ejtoursandprojects.it.com
+
+User-agent: *
+Allow: /
+Allow: /images/
+Allow: /styles.css
+Allow: /script.js
+
+# Disallow admin or private areas (if any)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Sitemap location
+Sitemap: https://ejtoursandprojects.it.com/sitemap.xml
+
+# Crawl delay (optional, helps prevent overloading server)
+Crawl-delay: 1
+
+# Specific bot instructions
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /images/
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /

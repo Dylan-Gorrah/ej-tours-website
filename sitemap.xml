@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://ejtoursandprojects.it.com/</loc>
+    <lastmod>2025-01-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://ejtoursandprojects.it.com/images/hero-table-mountain.jpg</image:loc>
+      <image:title>EJ Tours Cape Town - Table Mountain Views</image:title>
+      <image:caption>Experience breathtaking Cape Town with EJ Tours</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Tours Section -->
+  <url>
+    <loc>https://ejtoursandprojects.it.com/#tours</loc>
+    <lastmod>2025-01-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Table Mountain Tour -->
+  <url>
+    <loc>https://ejtoursandprojects.it.com/#tours/table-mountain</loc>
+    <lastmod>2025-01-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ejtoursandprojects.it.com/images/tour-table-mountain.jpg</image:loc>
+      <image:title>Table Mountain Tour - EJ Tours</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Cape Point Tour -->
+  <url>
+    <loc>https://ejtoursandprojects.it.com/#tours/cape-point</loc>
+    <lastmod>2025-01-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ejtoursandprojects.it.com/images/tour-cape-point.jpg</image:loc>
+      <image:title>Cape Point Tour - EJ Tours</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Wine Tours -->
+  <url>
+    <loc>https://ejtoursandprojects.it.com/#tours/wine</loc>
+    <lastmod>2025-01-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ejtoursandprojects.it.com/images/tour-wine.jpg</image:loc>
+      <image:title>Wine Tours Stellenbosch Franschhoek - EJ Tours</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Safari Tour -->
+  <url>
+    <loc>https://ejtoursandprojects.it.com/#tours/safari</loc>
+    <lastmod>2025-01-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ejtoursandprojects.it.com/images/tour-safari.jpg</image:loc>
+      <image:title>Safari Tour Big 5 - EJ Tours</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Penguin Tour -->
+  <url>
+    <loc>https://ejtoursandprojects.it.com/#tours/penguins</loc>
+    <lastmod>2025-01-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ejtoursandprojects.it.com/images/tour-penguins.jpg</image:loc>
+      <image:title>Boulders Beach Penguin Tour - EJ Tours</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Bo-Kaap Tour -->
+  <url>
+    <loc>https://ejtoursandprojects.it.com/#tours/bokaap</loc>
+    <lastmod>2025-01-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ejtoursandprojects.it.com/images/tour-bokaap.jpg</image:loc>
+      <image:title>Bo-Kaap Colorful Houses Tour - EJ Tours</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Robben Island Tour -->
+  <url>
+    <loc>https://ejtoursandprojects.it.com/#tours/robben-island</loc>
+    <lastmod>2025-01-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ejtoursandprojects.it.com/images/tour-robben-island.jpg</image:loc>
+      <image:title>Robben Island Historical Tour - EJ Tours</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Garden Route -->
+  <url>
+    <loc>https://ejtoursandprojects.it.com/#tours/garden-route</loc>
+    <lastmod>2025-01-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ejtoursandprojects.it.com/images/tour-garden-route.jpg</image:loc>
+      <image:title>Garden Route Tour - EJ Tours</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Booking Section -->
+  <url>
+    <loc>https://ejtoursandprojects.it.com/#booking</loc>
+    <lastmod>2025-01-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- About Section -->
+  <url>
+    <loc>https://ejtoursandprojects.it.com/#about</loc>
+    <lastmod>2025-01-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Contact Section -->
+  <url>
+    <loc>https://ejtoursandprojects.it.com/#contact</loc>
+    <lastmod>2025-01-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>
