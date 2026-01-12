@@ -94,7 +94,22 @@ const toastNotification = document.getElementById('toastNotification');
 // LOAD TOURS FUNCTION
 // ===========================
 function loadTours() {
-    tours.forEach(tour => {
+    const toursGrid = document.getElementById('toursGrid');
+    
+    if (!toursGrid) {
+        console.error('❌ Tours grid element not found!');
+        return;
+    }
+    
+    if (!tours || tours.length === 0) {
+        console.error('❌ No tours data available!');
+        return;
+    }
+    
+    console.log(`🎯 Loading ${tours.length} tours...`);
+    toursGrid.innerHTML = ''; // Clear existing content
+    
+    tours.forEach((tour, index) => {
         const tourCard = document.createElement('div');
         tourCard.className = 'tour-card';
         tourCard.innerHTML = `
@@ -111,7 +126,10 @@ function loadTours() {
             </div>
         `;
         toursGrid.appendChild(tourCard);
+        console.log(`✅ Loaded tour ${index + 1}: ${tour.name}`);
     });
+    
+    console.log('🎉 All tours loaded successfully!');
 }
 
 // ===========================
