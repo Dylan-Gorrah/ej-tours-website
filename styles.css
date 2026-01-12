@@ -654,7 +654,7 @@ footer {
    =========================== */
 .floating-contact-btn {
     position: fixed;
-    right: -200px; /* Start off-screen */
+    right: 30px; /* Start visible */
     bottom: 30px;
     background: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
     color: white;
@@ -673,7 +673,7 @@ footer {
     border: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    opacity: 0;
+    opacity: 1; /* Start visible */
 }
 
 /* Slide in animation */
@@ -733,11 +733,6 @@ footer {
     50% {
         box-shadow: 0 4px 25px rgba(44, 62, 80, 0.35);
     }
-}
-
-.floating-contact-btn.visible {
-    animation: slideInFromRight 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards,
-               subtlePulse 3s ease-in-out 1s infinite;
 }
 
 /* ===========================
