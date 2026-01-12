@@ -1,4 +1,25 @@
-# EJ Tours Website - File Structure Setup Guide
+# EJ Tours Website - Professional Tour Operator Platform
+
+## 🌟 About
+
+EJ Tours and Projects is a premier Cape Town tour operator website featuring beautiful UI/UX design, seamless booking functionality, and comprehensive tour information.
+
+---
+
+## 🎨 UI/UX Design Credit
+
+**Beautiful UI/UX Design** by [Rethabile Bridget Velelo](https://github.com/RethabileBridgetVelelo)
+
+✨ **Design Philosophy:** Creating beautiful simplicity that's functional, easy to navigate, and straight to the point without distracting customers from their checkout goals.
+
+**Key Design Principles:**
+- **Simplicity:** Clean, uncluttered interface
+- **Functionality:** Every element serves a purpose
+- **User Journey:** Seamless path from discovery to booking
+- **Mobile First:** Responsive design for all devices
+- **Accessibility:** Inclusive design for all users
+
+---
 
 ## 📁 Final File Structure
 

@@ -331,13 +331,15 @@ bookingForm.addEventListener('submit', function(e) {
         day: 'numeric'
     });
 
-    // Create professional WhatsApp message with properly encoded emojis
+    // Create professional WhatsApp message with better formatting
     let whatsappMessage = `✨ *NEW BOOKING REQUEST*
 ━━━━━━━━━━━━━━━━━━━━
+
 👥 *Guest Information*
 Name: ${fullName}
 Email: ${email}
 Phone: ${phone}
+
 📖 *Booking Details*
 Tour: ${tourName}
 Date: ${formattedDate}
@@ -345,18 +347,21 @@ Guests: ${guests} ${guests === '1' ? 'person' : 'people'}`;
     
     if (pickupLocation) {
         whatsappMessage += `
-Pickup: ${pickupLocation}`;
+
+📍 Pickup Location: ${pickupLocation}`;
     }
     
     if (specialRequests) {
         whatsappMessage += `
-📌 *Additional Notes*
+
+📝 *Special Requests:*
 ${specialRequests}`;
     }
     
     whatsappMessage += `
+
 ━━━━━━━━━━━━━━━━━━━━
-🌐 _via EJ Tours Website_`;
+🌐 _Sent via EJ Tours Website_`;
 
     // Your WhatsApp business number
     const whatsappNumber = '27749310308';
