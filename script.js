@@ -114,122 +114,75 @@ function loadTours() {
 }
 
 // ===========================
-// INITIALIZE ON PAGE LOAD
+// MOBILE MENU TOGGLE - IMPROVED
 // ===========================
-document.addEventListener('DOMContentLoaded', function() {
-    loadTours();
+function toggleMobileMenu() {
+    const isActive = navMenu.classList.toggle('active');
+    mobileMenuBtn.innerHTML = isActive 
+        ? '<i class="fas fa-times"></i>' 
+        : '<i class="fas fa-bars"></i>';
     
-    // Set min date to today
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('tourDate').min = today;
-    
-    // iOS Safari specific optimizations
-    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-        // Prevent zoom on input focus for iOS
-        const inputs = document.querySelectorAll('input, select, textarea');
-        inputs.forEach(input => {
-            input.addEventListener('touchstart', function() {
-                this.style.fontSize = '16px';
-            });
-        });
-        
-        // Better date picker handling for iOS
-        const dateInput = document.getElementById('tourDate');
-        if (dateInput) {
-            dateInput.addEventListener('focus', function() {
-                // iOS Safari date picker enhancement
-                if (this.showPicker) {
-                    this.showPicker();
-                }
-            });
-        }
-        
-        // Prevent elastic scrolling on iOS
-        document.body.addEventListener('touchmove', function(e) {
-            if (e.target.closest('.booking-form')) {
-                e.stopPropagation();
-            }
-        }, { passive: false });
-        
-        // iOS Safari smooth scrolling fix
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    // iOS Safari smooth scrolling
-                    const startPosition = window.pageYOffset;
-                    const targetPosition = targetElement.offsetTop - 80;
-                    const distance = targetPosition - startPosition;
-                    const duration = 800;
-                    let start = null;
-                    
-                    function animation(currentTime) {
-                        if (start === null) start = currentTime;
-                        const timeElapsed = currentTime - start;
-                        const run = ease(timeElapsed, startPosition, distance, duration);
-                        window.scrollTo(0, run);
-                        if (timeElapsed < duration) requestAnimationFrame(animation);
-                    }
-                    
-                    function ease(t, b, c, d) {
-                        t /= d/2;
-                        if (t < 1) return c/2*t*t + b;
-                        t--;
-                        return -c/2 * (t*(t-2) - 1) + b;
-                    }
-                    
-                    requestAnimationFrame(animation);
-                }
-            });
-        });
-        
-        // iOS Safari viewport height fix
-        function setViewportHeight() {
-            const vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
-        }
-        
-        setViewportHeight();
-        window.addEventListener('resize', setViewportHeight);
-        window.addEventListener('orientationchange', setViewportHeight);
-        
-        // iOS Safari tour card touch optimization
-        const tourCards = document.querySelectorAll('.tour-card');
-        tourCards.forEach(card => {
-            card.addEventListener('touchstart', function() {
-                this.style.transform = 'translateY(-5px)';
-            });
-            
-            card.addEventListener('touchend', function() {
-                setTimeout(() => {
-                    this.style.transform = 'translateY(0)';
-                }, 200);
-            });
-        });
-        
-        // iOS Safari performance optimizations
-        // Enable hardware acceleration
-        const elementsToAccelerate = document.querySelectorAll('.hero, .tour-card, .floating-contact-btn, .contact-panel');
-        elementsToAccelerate.forEach(element => {
-            element.style.transform = 'translateZ(0)';
-            element.style.backfaceVisibility = 'hidden';
-            element.style.perspective = '1000px';
-        });
+    // Prevent body scroll when menu is open on mobile
+    if (isActive) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = '';
+    }
+}
+
+// Add both click and touchend for better mobile support
+mobileMenuBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleMobileMenu();
+});
+
+// Prevent double-firing on touch devices
+let touchStarted = false;
+mobileMenuBtn.addEventListener('touchstart', function() {
+    touchStarted = true;
+});
+
+mobileMenuBtn.addEventListener('touchend', function(e) {
+    if (touchStarted) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleMobileMenu();
+        touchStarted = false;
     }
 });
 
 // ===========================
-// 🆕 SCROLL DETECTION FOR CONTACT BUTTON
+// CLOSE MOBILE MENU ON LINK CLICK
+// ===========================
+document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', function() {
+        navMenu.classList.remove('active');
+        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        document.body.style.overflow = '';
+    });
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', function(e) {
+    if (navMenu.classList.contains('active') && 
+        !navMenu.contains(e.target) && 
+        !mobileMenuBtn.contains(e.target)) {
+        navMenu.classList.remove('active');
+        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        document.body.style.overflow = '';
+    }
+});
+
+// ===========================
+// SCROLL DETECTION FOR CONTACT BUTTON - IMPROVED
 // ===========================
 let contactBtnVisible = false;
+let ticking = false;
 
-window.addEventListener('scroll', () => {
+function updateContactButton() {
     const heroHeight = document.querySelector('.hero').offsetHeight;
-    const scrollPosition = window.pageYOffset;
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
     
     // Show contact button after scrolling 70% past hero section
     if (scrollPosition > heroHeight * 0.7 && !contactBtnVisible) {
@@ -240,7 +193,20 @@ window.addEventListener('scroll', () => {
         contactPanel.classList.remove('active');
         contactBtnVisible = false;
     }
-});
+    
+    ticking = false;
+}
+
+// Use requestAnimationFrame for better performance
+window.addEventListener('scroll', function() {
+    if (!ticking) {
+        window.requestAnimationFrame(updateContactButton);
+        ticking = true;
+    }
+}, { passive: true });
+
+// Also check on load in case user refreshes mid-page
+window.addEventListener('load', updateContactButton);
 
 // ===========================
 // FLOATING CONTACT PANEL
@@ -270,7 +236,7 @@ contactPanel.addEventListener('click', function(e) {
 });
 
 // ===========================
-// 🆕 EMAIL AUTO-COPY FUNCTIONALITY
+// EMAIL AUTO-COPY FUNCTIONALITY
 // ===========================
 const emailBtn = document.querySelector('.email-btn');
 
@@ -322,39 +288,10 @@ emailBtn.addEventListener('click', async (e) => {
 });
 
 // ===========================
-// MOBILE MENU TOGGLE
-// ===========================
-mobileMenuBtn.addEventListener('click', function() {
-    navMenu.classList.toggle('active');
-    mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
-        ? '<i class="fas fa-times"></i>' 
-        : '<i class="fas fa-bars"></i>';
-});
-
-// ===========================
-// CLOSE MOBILE MENU ON LINK CLICK
-// ===========================
-document.querySelectorAll('nav a').forEach(link => {
-    link.addEventListener('click', function() {
-        navMenu.classList.remove('active');
-        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-    });
-});
-
-// ===========================
 // FORM SUBMISSION WITH WHATSAPP
 // ===========================
 bookingForm.addEventListener('submit', function(e) {
     e.preventDefault();
-    
-    // iOS Safari form validation enhancement
-    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-        // Force validation on iOS
-        if (!bookingForm.checkValidity()) {
-            bookingForm.reportValidity();
-            return;
-        }
-    }
     
     // Get form values
     const fullName = document.getElementById('fullName').value;
@@ -396,7 +333,7 @@ bookingForm.addEventListener('submit', function(e) {
     whatsappMessage += `%0A------------------------------------%0A`;
     whatsappMessage += `_Sent via EJ Tours Website_`;
 
-    // Your WhatsApp business number (including country code, no spaces or special characters)
+    // Your WhatsApp business number
     const whatsappNumber = '27749310308';
     
     // Create WhatsApp URL
@@ -420,18 +357,10 @@ bookingForm.addEventListener('submit', function(e) {
     // Show modal
     bookingModal.style.display = 'flex';
     
-    // iOS Safari specific WhatsApp opening
-    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-        // iOS Safari: Use location.href for better compatibility
-        setTimeout(function() {
-            window.location.href = whatsappURL;
-        }, 1000);
-    } else {
-        // Other browsers: Use window.open
-        setTimeout(function() {
-            window.open(whatsappURL, '_blank');
-        }, 1000);
-    }
+    // Open WhatsApp
+    setTimeout(function() {
+        window.location.href = whatsappURL;
+    }, 1000);
 });
 
 // ===========================
@@ -468,41 +397,28 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         
         const targetElement = document.querySelector(targetId);
         if(targetElement) {
-            // Check if iOS Safari for custom smooth scrolling
-            if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-                // iOS Safari smooth scrolling
-                const startPosition = window.pageYOffset;
-                const targetPosition = targetElement.offsetTop - 80;
-                const distance = targetPosition - startPosition;
-                const duration = 800;
-                let start = null;
-                
-                function animation(currentTime) {
-                    if (start === null) start = currentTime;
-                    const timeElapsed = currentTime - start;
-                    const run = ease(timeElapsed, startPosition, distance, duration);
-                    window.scrollTo(0, run);
-                    if (timeElapsed < duration) requestAnimationFrame(animation);
-                }
-                
-                function ease(t, b, c, d) {
-                    t /= d/2;
-                    if (t < 1) return c/2*t*t + b;
-                    t--;
-                    return -c/2 * (t*(t-2) - 1) + b;
-                }
-                
-                requestAnimationFrame(animation);
-            } else {
-                // Standard browsers smooth scrolling
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
+            targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
         }
     });
 });
 
-console.log('🚀 EJ Tours website loaded successfully!');
-console.log('✨ Contact button will slide in after scrolling past hero section');
+// ===========================
+// INITIALIZE ON PAGE LOAD
+// ===========================
+document.addEventListener('DOMContentLoaded', function() {
+    // Load tours
+    loadTours();
+    
+    // Set min date to today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('tourDate').min = today;
+    
+    // Check contact button visibility on load
+    updateContactButton();
+    
+    console.log('🚀 EJ Tours website loaded successfully!');
+    console.log('✨ Contact button will slide in after scrolling past hero section');
+});

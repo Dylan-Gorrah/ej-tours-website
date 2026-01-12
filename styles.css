@@ -654,7 +654,7 @@ footer {
    =========================== */
 .floating-contact-btn {
     position: fixed;
-    right: 30px; /* Start visible */
+    right: -200px; /* Start hidden off-screen */
     bottom: 30px;
     background: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
     color: white;
@@ -673,13 +673,15 @@ footer {
     border: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    opacity: 1; /* Start visible */
+    opacity: 0; /* Start hidden */
+    pointer-events: none;
 }
 
 /* Slide in animation */
 .floating-contact-btn.visible {
     right: 30px;
     opacity: 1;
+    pointer-events: auto;
     animation: slideInFromRight 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
 }
 
@@ -1028,14 +1030,40 @@ footer {
         background-color: white;
         padding: 20px;
         box-shadow: var(--shadow);
+        z-index: 999;
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     nav ul.active {
         display: flex;
+        animation: slideDown 0.3s ease-out;
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     .mobile-menu-btn {
         display: block;
+        z-index: 1000;
+    }
+    
+    nav a {
+        padding: 15px 10px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    nav a:last-child {
+        border-bottom: none;
     }
 
     .hero h1 {
